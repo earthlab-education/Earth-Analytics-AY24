@@ -21,7 +21,7 @@ jobs:
         with:
           github-token: ${{ secrets.EA_BOT_F24 }}
           script: |
-            return octokit.rest.teams.listMembersInOrg({
+            return github.rest.teams.listMembersInOrg({
               org: context.repo.owner,
               team_slug: "${{env.TEAM_SLUG}}"
             })

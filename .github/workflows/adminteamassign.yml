@@ -19,7 +19,7 @@ jobs:
         id: request-members
         uses: actions/github-script@v6.4.1
         with:
-          github-token: ${{ secrets.EA_BOT_F23_PAT }}
+          github-token: ${{ secrets.EA_BOT_F24 }}
           script: |
             return github.rest.teams.listMembersInOrg({
               org: context.repo.owner,

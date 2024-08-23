@@ -1,8 +1,8 @@
 ---
 name: Discussion
 about: Discussion materials
-title: "[DISCUSS]"
-labels: Discussion
+title: "[DISCUSSION GUIDE]"
+labels: agenda
 assignees: ''
 
 ---

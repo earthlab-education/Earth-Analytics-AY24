@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - name: Create duplicate issue for each member
-        uses: imjohnbo/issue-bot@v3.4.3
+        uses: imjohnbo/issue-bot@v3.4.4
         with:
           title: ${{ matrix.assignee }} ${{ github.event.issue.title }}
           body: ${{ github.event.issue.body }} 

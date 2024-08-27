@@ -5,5 +5,5 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| G. Paul Bailey | gpb3037 |  |
+| G. Paul Bailey | gpb3037 | unknown |
 

@@ -6,5 +6,4 @@ Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
 | Alison Post | akpost21  | [akpost21.github.io](akpost21.github.io) |
-| Allie Larsen | allierosel | allierosel.github.io |
 

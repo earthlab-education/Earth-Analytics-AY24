@@ -5,6 +5,6 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | -------- | ------------ | ------------- |
-| Anna Poslednik | annaposlednik |  |
+| Anna Poslednik | annaposlednik | annaposlednik.github.io |
 
 

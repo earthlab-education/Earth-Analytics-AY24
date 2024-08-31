@@ -6,7 +6,3 @@ Contributors:
 | Name              | GitHub Username  | Portfolio URL |
 | ----------------- | ---------------- | ------------- |
 | Lauren Alexandra  | lauren-alexandra | [lauren-alexandra.github.io](https://lauren-alexandra.github.io) |
-
-### About
-- Occupation: Data Scientist
-- Location: Sacramento, California

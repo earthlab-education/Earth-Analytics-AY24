@@ -5,4 +5,4 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Nate Quarderer | nquarder | [nquarder.github.io](nquarder.github.io) |
+| Nate Quarderer | nquarder | [nquarder.github.io](https://nquarder.github.io/) |

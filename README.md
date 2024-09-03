@@ -5,5 +5,5 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Thomas Stogoski | tjstogoski | [tjstogoski.github.io](tjstogoski.github.io) |
+| Thomas Stogoski | tjstogoski | [tjstogoski.github.io](https://tjstogoski.github.io) |
 

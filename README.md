@@ -5,5 +5,5 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Allie Larsen | allierosel | allierosel.github.io |
+| Allie Larsen | allierosel | [allierosel.github.io](https://github.com/allierosel/allierosel.github.io/tree/main) |
 

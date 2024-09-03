@@ -5,7 +5,7 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
+| Ana Maria Marangunic | amarangunic |[amarangunic.github.io](https://amarangunic.github.io)  |
 | Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 | Alison Post | akpost21  | [akpost21.github.io](akpost21.github.io) |
 | G. Paul Bailey | gpb3037 | https://gpb3037.github.io/ |
-

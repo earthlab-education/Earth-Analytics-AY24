@@ -5,5 +5,4 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Will Toon | WillToon | [WillToon.github.io](https://github.com/WillToon) |
-
+| Will Toon | WillToon | https://willtoon.github.io/ |

@@ -5,5 +5,5 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Erin Zimmerman | ZimmZone | <https://zimmzone.github.io>|
+| Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 

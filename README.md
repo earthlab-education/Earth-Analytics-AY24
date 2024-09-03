@@ -6,4 +6,6 @@ Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
 | Alison Post | akpost21  | [akpost21.github.io](akpost21.github.io) |
+| G. Paul Bailey | gpb3037 | https://gpb3037.github.io/ |
+
 

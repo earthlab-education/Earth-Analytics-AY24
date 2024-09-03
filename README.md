@@ -5,5 +5,5 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Ana Maria Marangunic | amarangunic |amarangunic.github.io  |
+| Ana Maria Marangunic | amarangunic |[amarangunic.github.io](https://amarangunic.github.io)  |
 

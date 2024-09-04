@@ -5,5 +5,5 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Randi Neff |BioNCphilic  | BioNCphilic.GitHub.io |
+| Randi Neff |BioNCphilic  | https://bioncphilic.github.io |
 

@@ -5,5 +5,5 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ----- | ----- | ------------- |
-| Atticus Baker| [atticusbaker](github.com/atticusbaker)|[atticusbaker.github.io/](https://atticusbaker.github.io/)  |
+| Atticus Baker| [atticusbaker](https://www.github.com/atticusbaker)|[atticusbaker.github.io/](https://atticusbaker.github.io/)  |
 

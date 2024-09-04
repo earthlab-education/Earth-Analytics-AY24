@@ -5,6 +5,7 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
+| Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a>
 | Hannah Rieder | reidhan | [reidhan.github.io](https://reidhan.github.io/) |
 | Atticus Baker| [atticusbaker](https://www.github.com/atticusbaker)|[atticusbaker.github.io/](https://atticusbaker.github.io/)  |
 | Nolan Welsh |npwelsh  | [npwelsh.github.io](https://npwelsh.github.io/) |

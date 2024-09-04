@@ -5,5 +5,5 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Hannah Rieder | reidhan | https://reidhan.github.io/ |
+| Hannah Rieder | reidhan | [reidhan.github.io](https://reidhan.github.io/) |
 

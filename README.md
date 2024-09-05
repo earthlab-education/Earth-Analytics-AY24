@@ -5,4 +5,4 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Zachary Decker | ZacharyCJDecker | https://github.com/ZacharyCJDecker |
+| Zachary Decker | ZacharyCJDecker | [https://github.com/ZacharyCJDecker](https://zacharycjdecker.github.io/) |

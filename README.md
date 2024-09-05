@@ -14,3 +14,4 @@ Contributors:
 | Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 | Alison Post | akpost21  | [akpost21.github.io](https://akpost21.github.io/) |
 | G. Paul Bailey | gpb3037 | https://gpb3037.github.io/ |
+| Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |

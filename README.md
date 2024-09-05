@@ -5,7 +5,7 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Hannah Rieder | reidhan | [reidhan.github.io](https://reidhan.github.io/) |
+| Hannah Rieder | hanried | [hanried.github.io](https://hanried.github.io/) |
 | Atticus Baker| [atticusbaker](https://www.github.com/atticusbaker)|[atticusbaker.github.io/](https://atticusbaker.github.io/)  |
 | Nolan Welsh |npwelsh  | [npwelsh.github.io](https://npwelsh.github.io/) |
 | Thomas Stogoski | tjstogoski | [tjstogoski.github.io](https://tjstogoski.github.io) |

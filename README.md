@@ -3,7 +3,7 @@
 Welcome to the Earth Analytics Program! You will use this repository to ask questions about the class and the homework, review each others' work, and join in class discussions.
 
 Contributors:
-| Chris Quinn | cmq879 | [cmq879.github.io](https://cmq879.github.io/) |
+| Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
 | Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a>
 | Hannah Rieder | reidhan | [reidhan.github.io](https://reidhan.github.io/) |
@@ -14,3 +14,4 @@ Contributors:
 | Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 | Alison Post | akpost21  | [akpost21.github.io](https://akpost21.github.io/) |
 | G. Paul Bailey | gpb3037 | https://gpb3037.github.io/ |
+| Chris Quinn | cmq879 | [cmq879.github.io](https://cmq879.github.io/) |

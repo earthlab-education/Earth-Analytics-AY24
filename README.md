@@ -15,3 +15,4 @@ Contributors:
 | Alison Post | akpost21  | [akpost21.github.io](https://akpost21.github.io/) |
 | G. Paul Bailey | gpb3037 | https://gpb3037.github.io/ |
 | Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |
+| Elyna Grapstein | [elyna-grapstein](https://github.com/elyna-grapstein/github.io) | [elyna-grapstein.github.io/github.io/](https://elyna-grapstein.github.io/github.io/) |

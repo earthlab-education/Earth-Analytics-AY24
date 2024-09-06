@@ -5,4 +5,4 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name              | GitHub Username  | Portfolio URL |
 | ----------------- | ---------------- | ------------- |
-| Lauren Alexandra  | lauren-alexandra | [lauren-alexandra.github.io](https://lauren-alexandra.github.io) |
+| Lauren Alexandra  | [lauren-alexandra](https://github.com/lauren-alexandra) | [lauren-alexandra.github.io](https://lauren-alexandra.github.io) |

@@ -5,6 +5,7 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
+| Randi Neff |BioNCphilic  | https://bioncphilic.github.io |
 | Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a>
 | Hannah Rieder | reidhan | [reidhan.github.io](https://reidhan.github.io/) |
 | Atticus Baker| [atticusbaker](https://www.github.com/atticusbaker)|[atticusbaker.github.io/](https://atticusbaker.github.io/)  |
@@ -16,4 +17,3 @@ Contributors:
 | G. Paul Bailey | gpb3037 | https://gpb3037.github.io/ |
 | Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |
 | Allen-Michael Moench | [almo1024](https://www.github.com/allenmoench) | [allenmoench.github.io](https://allenmoench.github.io) |
-

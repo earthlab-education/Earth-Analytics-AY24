@@ -5,7 +5,7 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
-| Zachary Decker | ZacharyCJDecker | [https://github.com/ZacharyCJDecker](https://zacharycjdecker.github.io/) |
+| Zachary Decker | ZacharyCJDecker | [ZacharyCJDecker.github.io](https://zacharycjdecker.github.io/) |
 | Victoria Aragon  |VictoriAragon  | https://VictoriAragon.github.io |
 | Randi Neff |BioNCphilic  | https://bioncphilic.github.io |
 | Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a>

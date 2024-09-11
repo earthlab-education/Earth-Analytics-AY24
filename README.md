@@ -17,5 +17,6 @@ Contributors:
 | Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 | Alison Post | akpost21  | [akpost21.github.io](https://akpost21.github.io/) |
 | G. Paul Bailey | gpb3037 | https://gpb3037.github.io/ |
+| Chris Quinn | cmq879 | [cmq879.github.io](https://cmq879.github.io/) |
 | Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |
 | Allen-Michael Moench | [almo1024](https://www.github.com/allenmoench) | [allenmoench.github.io](https://allenmoench.github.io) |

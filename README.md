@@ -5,6 +5,7 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
+| Nate Quarderer | nquarder | [nquarder.github.io](https://nquarder.github.io/) |
 | Victoria Aragon  |VictoriAragon  | https://VictoriAragon.github.io |
 | Randi Neff |BioNCphilic  | https://bioncphilic.github.io |
 | Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a>

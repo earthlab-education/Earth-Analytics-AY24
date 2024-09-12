@@ -5,6 +5,8 @@ Welcome to the Earth Analytics Program! You will use this repository to ask ques
 Contributors:
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
+| Nate Quarderer | nquarder | [nquarder.github.io](https://nquarder.github.io/) |
+| Victoria Aragon  |VictoriAragon  | https://VictoriAragon.github.io |
 | Randi Neff |BioNCphilic  | https://bioncphilic.github.io |
 | Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a>
 | Hannah Rieder | reidhan | [reidhan.github.io](https://reidhan.github.io/) |
@@ -15,5 +17,7 @@ Contributors:
 | Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 | Alison Post | akpost21  | [akpost21.github.io](https://akpost21.github.io/) |
 | G. Paul Bailey | gpb3037 | https://gpb3037.github.io/ |
+| Chris Quinn | cmq879 | [cmq879.github.io](https://cmq879.github.io/) |
 | Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |
 | Lauren Alexandra | [lauren-alexandra](https://github.com/lauren-alexandra) | [lauren-alexandra.github.io](https://lauren-alexandra.github.io) |
+| Allen-Michael Moench | [almo1024](https://www.github.com/allenmoench) | [allenmoench.github.io](https://allenmoench.github.io) |

@@ -6,4 +6,4 @@ Here is the
 [campus map](https://map.wisc.edu)
 and below is an interactive image of the campus area.
 
-<embed type="text/html" src="osm.html" width="600" height="600">
+<embed type="text/html" src="uwmadison.html" width="600" height="600">

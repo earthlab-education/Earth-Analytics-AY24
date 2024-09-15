@@ -3,6 +3,7 @@
 Welcome to the Earth Analytics Program! You will use this repository to ask questions about the class and the homework, review each others' work, and join in class discussions.
 
 Contributors:
+
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
 | (Instructor) Elsa Culler | [eculler](https://www.github.com/eculler) | [eculler.github.io](https://eculler.github.io) |
@@ -27,3 +28,9 @@ Contributors:
 | Nolan Welsh |npwelsh  | [npwelsh.github.io](https://npwelsh.github.io/) |
 | Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 | Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |
+
+Posts:
+
+{% for post in site.posts %}
+...
+{% endfor %}

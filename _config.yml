@@ -1,2 +1,5 @@
 title: Earth Data Analytics -- Foundations Student Blog 2024
 remote_theme: brianmaierjr/long-haul
+
+plugins: [jekyll-paginate]
+paginate: 20

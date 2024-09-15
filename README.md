@@ -23,5 +23,6 @@ Contributors:
 | Chris Quinn | cmq879 | [cmq879.github.io](https://cmq879.github.io/) |
 | Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |
 | Allen-Michael Moench | [almo1024](https://www.github.com/allenmoench) | [allenmoench.github.io](https://allenmoench.github.io) |
+| Lauren Gleason | [brglea](https://www.github.com/brglea) | [brglea.github.io](https://brglea.github.io) |
 | Lauren Alexandra | [lauren-alexandra](https://github.com/lauren-alexandra) | [lauren-alexandra.github.io](https://lauren-alexandra.github.io) |
 | Allen-Michael Moench | [almo1024](https://www.github.com/allenmoench) | [allenmoench.github.io](https://allenmoench.github.io) |

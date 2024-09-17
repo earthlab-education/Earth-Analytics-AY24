@@ -1,4 +1,3 @@
-{% toc %}
 
 ## "First" Map Posts
 

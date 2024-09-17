@@ -19,7 +19,7 @@ Contributors:
 | Allie Larsen | allierosel | [allierosel.github.io](https://allierosel.github.io) |
 | Ana Maria Marangunic | amarangunic |[amarangunic.github.io](https://amarangunic.github.io)  |
 | Allen-Michael Moench | [almo1024](https://www.github.com/allenmoench) | [allenmoench.github.io](https://allenmoench.github.io) |
-| Randi Neff |BioNCphilic  | https://bioncphilic.github.io |
+| Randi Neff | BioNCphilic  | https://bioncphilic.github.io |
 | Anna Poslednik | annaposlednik | [annaposlednik.github.io](https://annaposlednik.github.io) |
 | Chris Quinn | cmq879 | [cmq879.github.io](https://cmq879.github.io/) |
 | Hannah Rieder | reidhan | [reidhan.github.io](https://reidhan.github.io/) |

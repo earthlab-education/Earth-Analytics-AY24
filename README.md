@@ -29,4 +29,4 @@ Contributors:
 | Nolan Welsh |npwelsh  | [npwelsh.github.io](https://npwelsh.github.io/) |
 | Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 | Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |
-| Seth Arens | sear2701 | [sear2701.github.io](sear2701.github.io) |
+| Seth Arens | sear2701 | [sear2701.github.io](https://sear2701.github.io) |

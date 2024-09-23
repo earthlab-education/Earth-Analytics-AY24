@@ -7,6 +7,9 @@ Contributors:
 
 | Name | GitHub Username | Portfolio URL |
 | ---- | --------------- | ------------- |
+| Hannah Rieder | hanried | [hanried.github.io](https://hanried.github.io/) |
+| Anna Poslednik | annaposlednik | [annaposlednik.github.io](https://annaposlednik.github.io) |
+| Nate Quarderer | nquarder | [nquarder.github.io](https://nquarder.github.io/) |
 | (Instructor) Elsa Culler | [eculler](https://www.github.com/eculler) | [eculler.github.io](https://eculler.github.io) |
 | (Instructor) Nate Quarderer | nquarder | [nquarder.github.io](https://nquarder.github.io/) |
 | (Instructor) Alison Post | akpost21  | [akpost21.github.io](https://akpost21.github.io/) |
@@ -22,10 +25,9 @@ Contributors:
 | Randi Neff | BioNCphilic  | https://bioncphilic.github.io |
 | Anna Poslednik | annaposlednik | [annaposlednik.github.io](https://annaposlednik.github.io) |
 | Chris Quinn | cmq879 | [cmq879.github.io](https://cmq879.github.io/) |
-| Hannah Rieder | reidhan | [reidhan.github.io](https://reidhan.github.io/) |
 | Jim Sanovia | HeSapa09 | [hesapa9.github.io](https://hesapa9.github.io/) |
 | Thomas Stogoski | tjstogoski | [tjstogoski.github.io](https://tjstogoski.github.io) |
-| Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a>
+| Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a> |
 | Nolan Welsh |npwelsh  | [npwelsh.github.io](https://npwelsh.github.io/) |
 | Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 | Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |

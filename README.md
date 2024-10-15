@@ -12,6 +12,7 @@ Contributors:
 | (Instructor) Alison Post | akpost21  | [akpost21.github.io](https://akpost21.github.io/) |
 | Lauren Alexandra | [lauren-alexandra](https://github.com/lauren-alexandra) | [lauren-alexandra.github.io](https://lauren-alexandra.github.io) |
 | Victoria Aragon  |VictoriAragon  | https://VictoriAragon.github.io |
+| Seth Arens | sear2701 | [sear2701.github.io](https://sear2701.github.io) |
 | G. Paul Bailey | gpb3037 | https://gpb3037.github.io/ |
 | Atticus Baker| [atticusbaker](https://www.github.com/atticusbaker)|[atticusbaker.github.io/](https://atticusbaker.github.io/)  |
 | Zachary Decker | ZacharyCJDecker | [ZacharyCJDecker.github.io](https://zacharycjdecker.github.io/) |
@@ -22,10 +23,11 @@ Contributors:
 | Randi Neff | BioNCphilic  | https://bioncphilic.github.io |
 | Anna Poslednik | annaposlednik | [annaposlednik.github.io](https://annaposlednik.github.io) |
 | Chris Quinn | cmq879 | [cmq879.github.io](https://cmq879.github.io/) |
-| Hannah Rieder | reidhan | [reidhan.github.io](https://reidhan.github.io/) |
+| Hannah Rieder | hanried | [hanried.github.io](https://hanried.github.io/) |
 | Jim Sanovia | HeSapa09 | [hesapa9.github.io](https://hesapa9.github.io/) |
 | Thomas Stogoski | tjstogoski | [tjstogoski.github.io](https://tjstogoski.github.io) |
-| Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a>
+| Will Toon | WillToon | <a href="https://willtoon.github.io/" target="_blank">willtoon.github.io</a> |
 | Nolan Welsh |npwelsh  | [npwelsh.github.io](https://npwelsh.github.io/) |
 | Erin Zimmerman | ZimmZone |[zimmzone.github.io](https://zimmzone.github.io)|
 | Brian S. Yandell | [byandell](https://www.github.com/byandell) | [byandell.github.io](https://byandell.github.io) |
+

@@ -1,1 +1,1 @@
-[Anna's Osprey migration portfolio post](https://github.com/earthlab-education/species-distribution-coding-challenge-annaposlednik/blob/main/notebooks/osprey_migrations.ipynb)
+[Anna's Osprey migration portfolio post](https://annaposlednik.github.io/species_distribution/osprey_migrationsnb.html)

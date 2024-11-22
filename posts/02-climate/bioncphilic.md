@@ -1,1 +1,1 @@
-[My code for Coweeta temps](/nc_climate.html)
+[My code for Coweeta temps](/bioncphilic.md)

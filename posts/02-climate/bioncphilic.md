@@ -1,1 +1,1 @@
-[My code for Coweeta temps](https://bioncphilic.github.io/notebooks/nc_climate.html)
+[My code for Coweeta temps](bioncphilic.github.io/notebooks/nc_climate.html)

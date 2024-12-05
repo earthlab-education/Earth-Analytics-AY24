@@ -7,5 +7,4 @@ The project is in areas:
 - [Redlining Project](https://github.com/byandell/ESIIL/edit/main/docs/EarthDataAnalytics/index.md#redlining-project)
 
 Rendered report is in
-
-[EarthDataAnalytics Redlining Project](https://byandell.github.io/ESIIL/EarthDataAnalytics/#redlining-project)
+[EarthDataAnalytics Redlining Project](https://byandell.github.io/ESIIL/EarthDataAnalytics/#redlining-project).

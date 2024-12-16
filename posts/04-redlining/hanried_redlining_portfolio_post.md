@@ -1,1 +1,1 @@
-[Hannah Rieder Redlining Portfolio Post](https://hanried.github.io/earth_data_analytics_assignments/san-francisco-redlining-post-final.html)
+[Hannah Rieder Redlining Portfolio Post](https://github.com/earthlab-education/fundamentals-04-redlining-hanried/blob/main/san-francisco-redlining-post.md)

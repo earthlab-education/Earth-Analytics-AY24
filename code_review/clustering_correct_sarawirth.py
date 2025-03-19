@@ -1,0 +1,683 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Land cover classification at the Mississppi Delta
+# 
+# In this notebook, you will use a k-means **unsupervised** clustering
+# algorithm to group pixels by similar spectral signatures. **k-means** is
+# an **exploratory** method for finding patterns in data. Because it is
+# unsupervised, you don’t need any training data for the model. You also
+# can’t measure how well it “performs” because the clusters will not
+# correspond to any particular land cover class. However, we expect at
+# least some of the clusters to be identifiable as different types of land
+# cover.
+# 
+# You will use the [harmonized Sentinal/Landsat multispectral
+# dataset](https://lpdaac.usgs.gov/documents/1698/HLS_User_Guide_V2.pdf).
+# You can access the data with an [Earthdata
+# account](https://www.earthdata.nasa.gov/learn/get-started) and the
+# [`earthaccess` library from
+# NSIDC](https://github.com/nsidc/earthaccess):
+# 
+# ## STEP 1: SET UP
+# 
+# <link rel="stylesheet" type="text/css" href="./assets/styles.css"><div class="callout callout-style-default callout-titled callout-task"><div class="callout-header"><div class="callout-icon-container"><i class="callout-icon"></i></div><div class="callout-title-container flex-fill">Try It</div></div><div class="callout-body-container callout-body"><ol type="1">
+# <li>Import all libraries you will need for this analysis</li>
+# <li>Configure GDAL parameters to help avoid connection errors:
+# <code>python      os.environ["GDAL_HTTP_MAX_RETRY"] = "5"      os.environ["GDAL_HTTP_RETRY_DELAY"] = "1"</code></li>
+# </ol></div></div>
+
+# In[2]:
+
+
+#!pip install cartopy
+#!pip install earthaccess
+#!pip install earthpy
+#!pip install geoviews
+#!pip install hvplot
+#!pip install xarray
+#!pip install rioxarray
+#!pip install scikit-learn
+#!pip install --upgrade jupyter ipywidgets
+
+
+# In[3]:
+
+
+import os
+import pickle
+import re
+import warnings
+
+import cartopy.crs as ccrs
+import earthaccess
+import earthpy as et
+import geopandas as gpd
+
+
+# In[4]:
+
+
+import geoviews as gv
+import hvplot.pandas
+import hvplot.xarray
+import numpy as np
+import pandas as pd
+import rioxarray as rxr
+import rioxarray.merge as rxrmerge
+from tqdm.notebook import tqdm
+import xarray as xr
+from shapely.geometry import Polygon
+from sklearn.cluster import KMeans
+
+os.environ["GDAL_HTTP_MAX_RETRY"] = "5"
+os.environ["GDAL_HTTP_RETRY_DELAY"] = "1"
+
+warnings.simplefilter('ignore')
+
+
+# Below you can find code for a caching **decorator** which you can use in
+# your code. To use the decorator:
+# 
+# ``` python
+# @cached(key, override)
+# def do_something(*args, **kwargs):
+#     ...
+#     return item_to_cache
+# ```
+# 
+# This decorator will **pickle** the results of running the
+# `do_something()` function, and only run the code if the results don’t
+# already exist. To override the caching, for example temporarily after
+# making changes to your code, set `override=True`. Note that to use the
+# caching decorator, you must write your own function to perform each
+# task!
+
+# In[5]:
+
+
+def cached(func_key, override=False):
+    """
+    A decorator to cache function results
+    
+    Parameters
+    ==========
+    key: str
+      File basename used to save pickled results
+    override: bool
+      When True, re-compute even if the results are already stored
+    """
+    def compute_and_cache_decorator(compute_function):
+        """
+        Wrap the caching function
+        
+        Parameters
+        ==========
+        compute_function: function
+          The function to run and cache results
+        """
+        def compute_and_cache(*args, **kwargs):
+            """
+            Perform a computation and cache, or load cached result.
+            
+            Parameters
+            ==========
+            args
+              Positional arguments for the compute function
+            kwargs
+              Keyword arguments for the compute function
+            """
+            # Add an identifier from the particular function call
+            if 'cache_key' in kwargs:
+                key = '_'.join((func_key, kwargs['cache_key']))
+            else:
+                key = func_key
+
+            path = os.path.join(
+                et.io.HOME, et.io.DATA_NAME, 'jars', f'{key}.pickle')
+            
+            # Check if the cache exists already or override caching
+            if not os.path.exists(path) or override:
+                # Make jars directory if needed
+                os.makedirs(os.path.dirname(path), exist_ok=True)
+                
+                # Run the compute function as the user did
+                result = compute_function(*args, **kwargs)
+                
+                # Pickle the object
+                with open(path, 'wb') as file:
+                    pickle.dump(result, file)
+            else:
+                # Unpickle the object
+                with open(path, 'rb') as file:
+                    result = pickle.load(file)
+                    
+            return result
+        
+        return compute_and_cache
+    
+    return compute_and_cache_decorator
+
+
+# ## STEP 2: STUDY SITE
+# 
+# For this analysis, you will use a watershed from the [Water Boundary
+# Dataset](https://www.usgs.gov/national-hydrography/access-national-hydrography-products),
+# HU12 watersheds (WBDHU12.shp).
+# 
+# <link rel="stylesheet" type="text/css" href="./assets/styles.css"><div class="callout callout-style-default callout-titled callout-task"><div class="callout-header"><div class="callout-icon-container"><i class="callout-icon"></i></div><div class="callout-title-container flex-fill">Try It</div></div><div class="callout-body-container callout-body"><ol type="1">
+# <li>Download the Water Boundary Dataset for region 8 (Mississippi)</li>
+# <li>Select watershed 080902030506</li>
+# <li>Generate a site map of the watershed</li>
+# </ol>
+# <p>Try to use the <strong>caching decorator</strong></p></div></div>
+# 
+# We chose this watershed because it covers parts of New Orleans an is
+# near the Mississippi Delta. Deltas are boundary areas between the land
+# and the ocean, and as a result tend to contain a rich variety of
+# different land cover and land use types.
+# 
+# <link rel="stylesheet" type="text/css" href="./assets/styles.css"><div class="callout callout-style-default callout-response"><div class="callout-header"><div class="callout-icon-container"><i class="callout-icon"></i></div></div><div class="callout-body-container callout-body"><p>Write a 2-3 sentence <strong>site description</strong> (with
+# citations) of this area that helps to put your analysis in context.</p></div></div>
+
+# In[6]:
+
+
+@cached('wbd_08')
+def read_wbd_file(wbd_filename, huc_level, cache_key):
+    # Download and unzip
+    wbd_url = (
+        "https://prd-tnm.s3.amazonaws.com"
+        "/StagedProducts/Hydrography/WBD/HU2/Shape/"
+        f"{wbd_filename}.zip")
+    wbd_dir = et.data.get_data(url=wbd_url)
+                  
+    # Read desired data
+    wbd_path = os.path.join(wbd_dir, 'Shape', f'WBDHU{huc_level}.shp')
+    wbd_gdf = gpd.read_file(wbd_path, engine='pyogrio')
+    return wbd_gdf
+
+huc_level = 12
+wbd_gdf = read_wbd_file(
+    "WBD_08_HU2_Shape", huc_level, cache_key=f'hu{huc_level}')
+
+delta_gdf = (
+    wbd_gdf[wbd_gdf[f'huc{huc_level}']
+    .isin(['080902030506'])]
+    .dissolve()
+)
+
+(
+    delta_gdf.to_crs(ccrs.Mercator())
+    .hvplot(
+        alpha=.2, fill_color='white', 
+        tiles='EsriImagery', crs=ccrs.Mercator())
+    .opts(width=600, height=300)
+)
+
+
+# **YOUR SITE DESCRIPTION HERE**
+
+# ## STEP 3: MULTISPECTRAL DATA
+# 
+# ### Search for data
+# 
+# <link rel="stylesheet" type="text/css" href="./assets/styles.css"><div class="callout callout-style-default callout-titled callout-task"><div class="callout-header"><div class="callout-icon-container"><i class="callout-icon"></i></div><div class="callout-title-container flex-fill">Try It</div></div><div class="callout-body-container callout-body"><ol type="1">
+# <li>Log in to the <code>earthaccess</code> service using your Earthdata
+# credentials:
+# <code>python      earthaccess.login(persist=True)</code></li>
+# <li>Modify the following sample code to search for granules of the
+# HLSL30 product overlapping the watershed boundary from May to October
+# 2023 (there should be 76 granules):
+# <code>python      results = earthaccess.search_data(          short_name="...",          cloud_hosted=True,          bounding_box=tuple(gdf.total_bounds),          temporal=("...", "..."),      )</code></li>
+# </ol></div></div>
+
+# In[7]:
+
+
+# Log in to earthaccess
+earthaccess.login(persist=True)
+# Search for HLS tiles
+results = earthaccess.search_data(
+    short_name="HLSL30",
+    cloud_hosted=True,
+    bounding_box=tuple(delta_gdf.total_bounds),
+    temporal=("2024-06", "2024-08"),
+)
+
+
+# ### Compile information about each granule
+# 
+# I recommend building a GeoDataFrame, as this will allow you to plot the
+# granules you are downloading and make sure they line up with your
+# shapefile. You could also use a DataFrame, dictionary, or a custom
+# object to store this information.
+# 
+# <link rel="stylesheet" type="text/css" href="./assets/styles.css"><div class="callout callout-style-default callout-titled callout-task"><div class="callout-header"><div class="callout-icon-container"><i class="callout-icon"></i></div><div class="callout-title-container flex-fill">Try It</div></div><div class="callout-body-container callout-body"><ol type="1">
+# <li>For each search result:
+# <ol type="1">
+# <li>Get the following information (HINT: look at the [‘umm’] values for
+# each search result):
+# <ul>
+# <li>granule id (UR)</li>
+# <li>datetime</li>
+# <li>geometry (HINT: check out the shapely.geometry.Polygon class to
+# convert points to a Polygon)</li>
+# </ul></li>
+# <li>Open the granule files. I recomment opening one granule at a time,
+# e.g. with (<code>earthaccess.open([result]</code>).</li>
+# <li>For each file (band), get the following information:
+# <ul>
+# <li>file handler returned from <code>earthaccess.open()</code></li>
+# <li>tile id</li>
+# <li>band number</li>
+# </ul></li>
+# </ol></li>
+# <li>Compile all the information you collected into a GeoDataFrame</li>
+# </ol></div></div>
+
+# In[8]:
+
+
+def get_earthaccess_links(results):
+    url_re = re.compile(
+        r'\.(?P<tile_id>\w+)\.\d+T\d+\.v\d\.\d\.(?P<band>[A-Za-z0-9]+)\.tif')
+
+    # Loop through each granule
+    link_rows = []
+    url_dfs = []
+    for granule in tqdm(results):
+        # Get granule information
+        info_dict = granule['umm']
+        granule_id = info_dict['GranuleUR']
+        datetime = pd.to_datetime(
+            info_dict
+            ['TemporalExtent']['RangeDateTime']['BeginningDateTime'])
+        points = (
+            info_dict
+            ['SpatialExtent']['HorizontalSpatialDomain']['Geometry']['GPolygons'][0]
+            ['Boundary']['Points'])
+        geometry = Polygon(
+            [(point['Longitude'], point['Latitude']) for point in points])
+        
+        # Get URL
+        files = earthaccess.open([granule])
+
+        # Build metadata DataFrame
+        for file in files:
+            match = url_re.search(file.full_name)
+            if match is not None:
+                link_rows.append(
+                    gpd.GeoDataFrame(
+                        dict(
+                            datetime=[datetime],
+                            tile_id=[match.group('tile_id')],
+                            band=[match.group('band')],
+                            url=[file],
+                            geometry=[geometry]
+                        ),
+                        crs="EPSG:4326"
+                    )
+                )
+
+    # Concatenate metadata DataFrame
+    file_df = pd.concat(link_rows).reset_index(drop=True)
+    return file_df
+
+
+# ### Open, crop, and mask data
+# 
+# This will be the most resource-intensive step. I recommend caching your
+# results using the `cached` decorator or by writing your own caching
+# code. I also recommend testing this step with one or two dates before
+# running the full computation.
+# 
+# This code should include at least one **function** including a
+# numpy-style docstring. A good place to start would be a function for
+# opening a single masked raster, applying the appropriate scale
+# parameter, and cropping.
+# 
+# <link rel="stylesheet" type="text/css" href="./assets/styles.css"><div class="callout callout-style-default callout-titled callout-task"><div class="callout-header"><div class="callout-icon-container"><i class="callout-icon"></i></div><div class="callout-title-container flex-fill">Try It</div></div><div class="callout-body-container callout-body"><ol type="1">
+# <li>For each granule:
+# <ol type="1">
+# <li><p>Open the Fmask band, crop, and compute a quality mask for the
+# granule. You can use the following code as a starting point, making sure
+# that <code>mask_bits</code> contains the quality bits you want to
+# consider: ```python # Expand into a new dimension of binary bits bits =
+# ( np.unpackbits(da.astype(np.uint8), bitorder=‘little’)
+# .reshape(da.shape + (-1,)) )</p>
+# <p># Select the required bits and check if any are flagged mask =
+# np.prod(bits[…, mask_bits]==0, axis=-1) ```</p></li>
+# <li><p>For each band that starts with ‘B’:</p>
+# <ol type="1">
+# <li>Open the band, crop, and apply the scale factor</li>
+# <li>Name the DataArray after the band using the <code>.name</code>
+# attribute</li>
+# <li>Apply the cloud mask using the <code>.where()</code> method</li>
+# <li>Store the DataArray in your data structure (e.g. adding a
+# GeoDataFrame column with the DataArray in it. Note that you will need to
+# remove the rows for unused bands)</li>
+# </ol></li>
+# </ol></li>
+# </ol></div></div>
+
+# In[9]:
+
+
+@cached('delta_reflectance_da_df')
+def compute_reflectance_da(search_results, boundary_gdf):
+    """
+    Connect to files over VSI, crop, cloud mask, and wrangle
+    
+    Returns a single reflectance DataFrame 
+    with all bands as columns and
+    centroid coordinates and datetime as the index.
+    
+    Parameters
+    ==========
+    file_df : pd.DataFrame
+        File connection and metadata (datetime, tile_id, band, and url)
+    boundary_gdf : gpd.GeoDataFrame
+        Boundary use to crop the data
+    """
+    def open_dataarray(url, boundary_proj_gdf, scale=1, masked=True):
+        # Open masked DataArray
+        da = rxr.open_rasterio(url, masked=masked).squeeze() * scale
+        
+        # Reproject boundary if needed
+        if boundary_proj_gdf is None:
+            boundary_proj_gdf = boundary_gdf.to_crs(da.rio.crs)
+            
+        # Crop
+        cropped = da.rio.clip_box(*boundary_proj_gdf.total_bounds)
+        return cropped
+    
+    def compute_quality_mask(da, mask_bits=[1, 2, 3]):
+        """Mask out low quality data by bit"""
+        # Unpack bits into a new axis
+        bits = (
+            np.unpackbits(
+                da.astype(np.uint8), bitorder='little'
+            ).reshape(da.shape + (-1,))
+        )
+
+        # Select the required bits and check if any are flagged
+        mask = np.prod(bits[..., mask_bits]==0, axis=-1)
+        return mask
+
+    file_df = get_earthaccess_links(search_results)
+    
+    granule_da_rows= []
+    boundary_proj_gdf = None
+
+    # Loop through each image
+    group_iter = file_df.groupby(['datetime', 'tile_id'])
+    for (datetime, tile_id), granule_df in tqdm(group_iter):
+        print(f'Processing granule {tile_id} {datetime}')
+              
+        # Open granule cloud cover
+        cloud_mask_url = (
+            granule_df.loc[granule_df.band=='Fmask', 'url']
+            .values[0])
+        cloud_mask_cropped_da = open_dataarray(cloud_mask_url, boundary_proj_gdf, masked=False)
+
+        # Compute cloud mask
+        cloud_mask = compute_quality_mask(cloud_mask_cropped_da)
+
+        # Loop through each spectral band
+        da_list = []
+        df_list = []
+        for i, row in granule_df.iterrows():
+            if row.band.startswith('B'):
+                # Open, crop, and mask the band
+                band_cropped = open_dataarray(
+                    row.url, boundary_proj_gdf, scale=0.0001)
+                band_cropped.name = row.band
+                # Add the DataArray to the metadata DataFrame row
+                row['da'] = band_cropped.where(cloud_mask)
+                granule_da_rows.append(row.to_frame().T)
+    
+    # Reassemble the metadata DataFrame
+    return pd.concat(granule_da_rows)
+
+reflectance_da_df = compute_reflectance_da(results, delta_gdf)
+
+
+# ### Merge and Composite Data
+# 
+# You will notice for this watershed that: 1. The raster data for each
+# date are spread across 4 granules 2. Any given image is incomplete
+# because of clouds
+# 
+# <link rel="stylesheet" type="text/css" href="./assets/styles.css"><div class="callout callout-style-default callout-titled callout-task"><div class="callout-header"><div class="callout-icon-container"><i class="callout-icon"></i></div><div class="callout-title-container flex-fill">Try It</div></div><div class="callout-body-container callout-body"><ol type="1">
+# <li><p>For each band:</p>
+# <ol type="1">
+# <li><p>For each date:</p>
+# <ol type="1">
+# <li>Merge all 4 granules</li>
+# <li>Mask any negative values created by interpolating from the nodata
+# value of -9999 (<code>rioxarray</code> should account for this, but
+# doesn’t appear to when merging. If you leave these values in they will
+# create problems down the line)</li>
+# </ol></li>
+# <li><p>Concatenate the merged DataArrays along a new date
+# dimension</p></li>
+# <li><p>Take the mean in the date dimension to create a composite image
+# that fills cloud gaps</p></li>
+# <li><p>Add the band as a dimension, and give the DataArray a
+# name</p></li>
+# </ol></li>
+# <li><p>Concatenate along the band dimension</p></li>
+# </ol></div></div>
+
+# In[10]:
+
+
+@cached('delta_reflectance_da')
+def merge_and_composite_arrays(granule_da_df):
+    # Merge and composite and image for each band
+    df_list = []
+    da_list = []
+    for band, band_df in tqdm(granule_da_df.groupby('band')):
+        merged_das = []
+        for datetime, date_df in tqdm(band_df.groupby('datetime')):
+            # Merge granules for each date
+            merged_da = rxrmerge.merge_arrays(list(date_df.da))
+            # Mask negative values
+            merged_da = merged_da.where(merged_da>0)
+            merged_das.append(merged_da)
+            
+        # Composite images across dates
+        composite_da = xr.concat(merged_das, dim='datetime').median('datetime')
+        composite_da['band'] = int(band[1:])
+        composite_da.name = 'reflectance'
+        da_list.append(composite_da)
+        
+    return xr.concat(da_list, dim='band')
+
+reflectance_da = merge_and_composite_arrays(reflectance_da_df)
+reflectance_da
+
+
+# ## STEP 4: K-MEANS
+# 
+# Cluster your data by spectral signature using the k-means algorithm.
+# 
+# <link rel="stylesheet" type="text/css" href="./assets/styles.css"><div class="callout callout-style-default callout-titled callout-task"><div class="callout-header"><div class="callout-icon-container"><i class="callout-icon"></i></div><div class="callout-title-container flex-fill">Try It</div></div><div class="callout-body-container callout-body"><ol type="1">
+# <li>Convert your DataArray into a <strong>tidy</strong> DataFrame of
+# reflectance values (hint: check out the <code>.to_dataframe()</code> and
+# <code>.unstack()</code> methods)</li>
+# <li>Filter out all rows with no data (all 0s or any N/A values)</li>
+# <li>Fit a k-means model. You can experiment with the number of groups to
+# find what works best.</li>
+# </ol></div></div>
+
+# In[11]:
+
+
+# Convert spectral DataArray to a tidy DataFrame
+model_df = reflectance_da.to_dataframe().reflectance.unstack('band')
+model_df = model_df.drop(columns=[10, 11]).dropna()
+
+# Running the fit and predict functions at the same time.
+# We can do this since we don't have target data.
+prediction = KMeans(n_clusters=6).fit_predict(model_df.values)
+
+# Add the predicted values back to the model DataFrame
+model_df['clusters'] = prediction
+model_df
+
+
+# ## STEP 5: PLOT
+# 
+# <link rel="stylesheet" type="text/css" href="./assets/styles.css"><div class="callout callout-style-default callout-titled callout-task"><div class="callout-header"><div class="callout-icon-container"><i class="callout-icon"></i></div><div class="callout-title-container flex-fill">Try It</div></div><div class="callout-body-container callout-body"><p>Create a plot that shows the k-means clusters next to an RGB image of
+# the area. You may need to brighten your RGB image by multiplying it by
+# 10. The code for reshaping and plotting the clusters is provided for you
+# below, but you will have to create the RGB plot yourself!</p>
+# <p>So, what is <code>.sortby(['x', 'y'])</code> doing for us? Try the
+# code without it and find out.</p></div></div>
+
+# In[12]:
+
+
+rgb = reflectance_da.sel(band=[4, 3, 2])
+rgb_uint8 = (rgb * 255).astype(np.uint8).where(rgb!=np.nan)
+rgb_bright = rgb_uint8 * 10
+rgb_sat = rgb_bright.where(rgb_bright < 255, 255)
+
+(
+    rgb_sat.hvplot.rgb( 
+        x='x', y='y', bands='band',
+        data_aspect=1,
+        xaxis=None, yaxis=None)
+    + 
+    model_df.clusters.to_xarray().sortby(['x', 'y']).hvplot(
+        cmap="Colorblind", aspect='equal') 
+)
+
+
+# Compare the clusters to the RGB image: Do the clusters visually align with distinct land cover types (e.g., water, vegetation, urban areas)?
+# 
+# The clusters seem to at least generally alight with distinct land cover types. There could be more separation amongst the clusters at lower elevations. Some of the higher areas, seem to be pretty mixed, with clusters 4,5,and 1 making up the lighter green vegatation. Patterns in the k-means plot match those in the RGB image, which is desirable. 
+# 
+# Testing more or fewer clusters could help. 
+# 
+
+# K-Means clustering of RGB watershed 
+
+# In[ ]:
+
+
+
+
+
+# In[17]:
+
+
+# Convert spectral DataArray to a tidy DataFrame
+model_df6 = reflectance_da.to_dataframe().reflectance.unstack('band')
+
+model_df6 = model_df6.drop(columns=[10, 11]).dropna()
+
+# Running the fit and predict functions at the same time.
+# We can do this since we don't have target data.
+prediction6 = KMeans(n_clusters=5).fit_predict(model_df.values)
+
+# Add the predicted values back to the model DataFrame
+model_df6['clusters'] = prediction6
+model_df6
+
+
+# In[18]:
+
+
+rgb = reflectance_da.sel(band=[4, 3, 2])
+rgb_uint8 = (rgb * 255).astype(np.uint8).where(rgb!=np.nan)
+rgb_bright = rgb_uint8 * 10
+rgb_sat = rgb_bright.where(rgb_bright < 255, 255)
+
+(
+    rgb_sat.hvplot.rgb( 
+        x='x', y='y', bands='band',
+        data_aspect=1,
+        xaxis=None, yaxis=None)
+    + 
+    model_df6.clusters.to_xarray().sortby(['x', 'y']).hvplot(
+        cmap="Colorblind", aspect='equal') 
+)
+
+
+# In[23]:
+
+
+# Convert spectral DataArray to a tidy DataFrame
+model_df12 = reflectance_da.to_dataframe().reflectance.unstack('band')
+
+model_df12 = model_df12.drop(columns=[10, 11]).dropna()
+
+# Running the fit and predict functions at the same time.
+# We can do this since we don't have target data.
+prediction12 = KMeans(n_clusters=12).fit_predict(model_df.values)
+
+# Add the predicted values back to the model DataFrame
+model_df12['clusters'] = prediction6
+model_df12
+
+
+# In[27]:
+
+
+rgb = reflectance_da.sel(band=[4, 3, 2])
+rgb_uint8 = (rgb * 255).astype(np.uint8).where(rgb!=np.nan)
+rgb_bright = rgb_uint8 * 10
+rgb_sat = rgb_bright.where(rgb_bright < 255, 255)
+
+(
+    rgb_sat.hvplot.rgb( 
+        x='x', y='y', bands='band',
+        data_aspect=1,
+        xaxis=None, yaxis=None)
+    + 
+    model_df12.clusters.to_xarray().sortby(['x', 'y']).hvplot(
+        cmap="Colorblind", aspect='equal') 
+)
+
+
+# In[ ]:
+
+
+More clusters does look better but we run the risk of overfitting. 
+
+
+# In[30]:
+
+
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+distortions = []
+K_range = range(2, 30)  # Trying multiple cluster numbers
+
+for k in K_range:
+    kmeans = KMeans(n_clusters=k, random_state=42)
+    kmeans.fit(model_df12.drop(columns=['clusters']))
+    distortions.append(kmeans.inertia_)
+
+plt.plot(K_range, distortions, marker='o')
+plt.xlabel('Number of Clusters (K)')
+plt.ylabel('Inertia')
+plt.title('Elbow Method for Optimal K')
+plt.show()
+
+
+# In[ ]:
+
+
+nbconvert --to script your_notebook_name.ipynb
+
+
+# In[ ]:
+
+
+
+

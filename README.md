@@ -10,6 +10,7 @@ Contributors:
 | (Instructor) Elsa Culler | [eculler](https://www.github.com/eculler) | [eculler.github.io](https://eculler.github.io) |
 | (Instructor) Nate Quarderer | nquarder | [nquarder.github.io](https://nquarder.github.io/) |
 | (Instructor) Alison Post | akpost21  | [akpost21.github.io](https://akpost21.github.io/) |
+(Instructor) Lilly Jones | lijo8146  | [lijo8146.github.io](https://lijo8146.github.io) |
 | Lauren Alexandra | [lauren-alexandra](https://github.com/lauren-alexandra) | [lauren-alexandra.github.io](https://lauren-alexandra.github.io) |
 | Victoria Aragon  |VictoriAragon  | https://VictoriAragon.github.io |
 | Seth Arens | sear2701 | [sear2701.github.io](https://sear2701.github.io) |
